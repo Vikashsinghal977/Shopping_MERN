@@ -1,0 +1,24 @@
+{
+  "name": "shopping",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Backend/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vikashsinghal977/Shopping_MERN.git"
+  },
+  "author": "VikashSinghal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vikashsinghal977/Shopping_MERN/issues"
+  },
+  "homepage": "https://github.com/Vikashsinghal977/Shopping_MERN#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.1"
+  }
+}
