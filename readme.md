@@ -18,3 +18,6 @@ stap[1] : To create 2 folders first is backend second is frontend
 		
 		1. Make config file with dotenv to sath the path of the host
 		2. Create a controller folder and routes folders
+		3. After that make a productContol and productRoutes file
+		4. productcontroler can export alll the prodouct
+		5. productRoutes can diffect the product rodut
