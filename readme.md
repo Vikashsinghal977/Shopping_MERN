@@ -1,7 +1,8 @@
 ---------------------------- MERN Project ----------------------------
 
 stap[1] : To create 2 folders first is backend second is frontend 
-    >-------------------------Backend file----------------------------
+    
+	------------------------Backend Folder----------------------------
 
 	stap[2] : then after create app.js and server.js under the backend folder after open terminal 
 
