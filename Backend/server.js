@@ -2,13 +2,13 @@ const app = require("./app");
 
 const dotenv = require("dotenv");
 
-
-
+const connectDatabase = require("./databases/database");
 
 
 // config
 dotenv.config({path:"Backend/config/config.env"});
 
+connectDatabase();
 
 
 

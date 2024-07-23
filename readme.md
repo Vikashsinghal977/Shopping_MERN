@@ -21,3 +21,4 @@ stap[1] : To create 2 folders first is backend second is frontend
 		3. After that make a productContol and productRoutes file
 		4. productcontroler can export alll the prodouct
 		5. productRoutes can diffect the product rodut
+		6. Connect the data base to databse folder.
