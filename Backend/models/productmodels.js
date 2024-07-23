@@ -1,0 +1,71 @@
+const { request } = require("express");
+const mongoose = require("mongoose");
+
+const productSchema = mongoose.Schema({
+    name: {
+        type:String,
+        required:[true, "Please Enter product name "],
+        trim:true
+    },
+    discription: {
+        type:String,
+        required:[true, "Please Enter product discription "]
+    },
+    price: {
+        type:String,
+        required:[true, "Please Enter product price"],
+        maxLength:[8, "Price cannot exceed 8 characters"]
+    },
+    rating:{
+        type:String,
+        default:0
+    },
+    images:[
+        {
+            publice_id:{
+                type:String,
+                required:true
+            },
+            url:{
+                type:String,
+                required:true
+            }
+        }
+    ],
+    category:{
+        type:String,
+        required:[true, "Please Enter product Category"]
+    },
+    stock:{
+        type:Number,
+        required:[true, "Please Enter product Stock"],
+        maxLength:[4, "Stock cannot exceed 4 characters"],
+        default:1
+    },
+    numOfReviews:{
+        type:Number,
+        default:0
+    },
+    reviews:[
+        {
+            name:{
+                type:String,
+                required:true
+            },
+            rating:{
+                type:Number,
+                required:true
+            },
+            comment:{
+                type:String,
+                required:true
+            }
+        }
+    ],
+    createdAt:{
+        type:Date,
+        default:Date.now
+    }
+})
+
+module.exports = mongoose.model("Product", productSchema);
