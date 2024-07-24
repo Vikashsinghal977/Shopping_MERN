@@ -6,7 +6,7 @@ const Product = require("../models/productmodels");
 exports.createProduct = async (req, res, next) => {
     const product = await Product.create(req.body);
     
-    res.state(201).json({
+    res.status(201).json({
         success:true,
         product
     })
@@ -14,5 +14,5 @@ exports.createProduct = async (req, res, next) => {
 }
 
 exports.getAllProducts = (req, res) => {
-    res.state(200).json({mesage:"route is working"});
+    res.status(200).json({mesage:"route is working"});
 } 
