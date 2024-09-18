@@ -5,6 +5,7 @@ const ErrorHander = require("../utils/errorhandler");
 
 //Create Product  --> Admin 
 exports.createProduct = async (req, res, next) => {
+    
     const product = await Product.create(req.body);
     
     res.status(201).json({
