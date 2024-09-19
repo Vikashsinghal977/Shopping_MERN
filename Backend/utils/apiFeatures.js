@@ -5,6 +5,7 @@ class ApiFeatures {
         this.queryStr=queryStr;
     }
 
+    // Searching Keywords 
     search(){
         const keyword = this.queryStr.keyword ? {
             name:{
@@ -17,6 +18,7 @@ class ApiFeatures {
         return this;
     }
 
+    // Filter
     filter(){
         const queryCopy = {...this.queryStr};
         // console.log("query copy",queryCopy)
@@ -34,6 +36,18 @@ class ApiFeatures {
         return this;
     }
 
-}
+    //Pagination
+    pagination(resultPerpage){
+        const currentpage = Number(this.queryStr.page) || 1;
+
+        
+        const skip = resultPerpage * (currentpage - 1);
+        // console.log("This :",skip);
+        this.query = this.query.limit(resultPerpage).skip(skip);
+
+        return this;
+    }
+
+} 
 
 module.exports = ApiFeatures;
