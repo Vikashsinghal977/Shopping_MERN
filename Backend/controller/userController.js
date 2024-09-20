@@ -12,6 +12,8 @@ exports.registerUser = catchAsyncError( async(req, res, next) => {
         password,
     } = req.body;
 
+
+    // console.log("The RegisterUser body is:", req.body)
     const user = await User.create({
         name,
         email,
@@ -22,8 +24,45 @@ exports.registerUser = catchAsyncError( async(req, res, next) => {
         }
     });
 
+    const token = user.getJWTToken();
+
     res.status(201).json({
         success:true,
-        user,
+        token,
+    })
+});
+
+
+exports.loginUser = catchAsyncError(async (req, res, next)=>{
+
+    const {
+        email,
+        password,
+    }= req.body;
+
+    // checking if your has given password and email both
+
+    if (!email  || !password){
+        return next(new ErrorHander("Please Enter email and passsowrd",400));
+    }
+
+    const user = await User.findOne({email}).select("+password");
+
+    if (!user){
+        return next(new ErrorHander("Invelid email and password",401));
+    }
+
+    const isPasswordMatched = await user.comparePassword(password);
+
+
+    if (!isPasswordMatched){
+        return next(new ErrorHander("Invelid email and password",401));
+    }
+
+    const token = user.getJWTToken();
+
+    res.status(200).json({
+        success:true,
+        token,
     })
 })
