@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs/dist/bcrypt");
+const crypto = require("crypto")
 const userSchema = new mongoose.Schema({
 
     name:{
@@ -36,7 +37,7 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:"user",
     },
-    resetPassword:{
+    resetPasswordToken:{
         type:String,
     },
     resetPasswordExpire:{
@@ -61,10 +62,29 @@ userSchema.methods.getJWTToken = function () {
 }
 
 //compare password
-
 userSchema.methods.comparePassword = async function(enterpassword){
     
     return await bcrypt.compare(enterpassword,this.password)
 }
+
+
+//Generating Password Reset token
+userSchema.methods.getRestPasswordToken = function (){
+
+    // Generating Token
+    const resetToken = crypto.randomBytes(20).toString('hex')
+
+    // Hashing and add to userSchema
+    this.resetPasswordToken = crypto
+        .createHash("sha256")
+        .update(resetToken)
+        .digest("hex");
+
+    this.resetPasswordExpire = Date.now() + 15 *60*1000;
+
+    return resetToken;
+}
+
+
 
 module.exports = mongoose.model("User",userSchema)
