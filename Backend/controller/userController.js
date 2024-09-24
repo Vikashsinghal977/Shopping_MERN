@@ -81,23 +81,14 @@ exports.logout = catchAsyncError(async (req, res, next) => {
 exports.forgotPassword = catchAsyncError(async (req, res, next) => {
 
     const user = await User.findOne({ email: req.body.email });
-
-
     if (!user) {
- 
         return next(new ErrorHander("User not found",404));
     }
-
     //Get ResetPassword token
-
     const resetToken = user.getRestPasswordToken();
-
-
     await user.save({ validateBeforeSave: false });
 
-
     const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`;
-
 
     const message = `your password reset token is :- \n\n ${resetPasswordUrl} \n\n if you not requested this email than, please ignore it`;
 
@@ -107,11 +98,14 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
             subject: `Ecommerce password Recovery`,
             message,
         })
+
         res.status(200).json({
             success: true,
             message: `Email send to ${user.email} Successfully`
         })
+
     } catch (error) {
+
         user.resetPasswordToken = undefined;
         user.resetPasswordExpire = undefined
         await user.save({ validateBeforeSave: false });
