@@ -140,7 +140,7 @@ exports.resetPassword = catchAsyncError(async (req,res, next) => {
 })
 
 //Get user details based on id
-exports.getSingleDetails = catchAsyncError(async (req, res, next) => {
+exports.getSingleUser = catchAsyncError(async (req, res, next) => {
 
     const user = await User.findById(req.params.id);
 
@@ -221,4 +221,46 @@ exports.getAllUsers = catchAsyncError(async (req, res, next) => {
         success:true,
         users,
     })
+})
+
+
+// Update user > (Admin);
+exports.updateUserRole = catchAsyncError(async (req, res, next) => {
+
+    const newUserData = {
+        name:req.body.name,
+        email:req.body.email, 
+        role:req.body.role,
+    }
+    const user = await User.findByIdAndUpdate(req.params.id, newUserData,{
+        new:true,
+        runValidators:true,
+        useFindAndModify:false
+    })
+    
+    res.status(200).json({
+        success:true,
+        user,
+    }) 
+})
+
+
+// Delete User > (Admin);
+exports.DeleteUser = catchAsyncError(async (req, res, next) => {
+
+    const user = await User.findById(req.params.id);
+
+    // we will Remove cloudinary later 
+
+    if (!user){
+        return next(new ErrorHander("User not fund", 404))
+    }
+
+    await user.deleteOne();
+
+    res.status(200).json({
+        success:true,
+        massage:"User deleted succefully"
+    })
+
 })
