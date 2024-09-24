@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 const sendEmail = async(options) => {
     const transpoter = nodemailer.createTransport({
         host:"smtp.gmail.com",
-        port:456,
+        port:465,
         service:process.env.SMPT_SERVICE,
         auth:{
             user:process.env.SMPT_MAIL,
