@@ -4,8 +4,8 @@ const User = require("../models/userModel");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail")
 const crypto = require("crypto")
-// Register a user
 
+// Register a user
 exports.registerUser = catchAsyncError(async (req, res, next) => {
 
     const {
@@ -13,9 +13,8 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
         email,
         password,
     } = req.body;
-
-
     // console.log("The RegisterUser body is:", req.body)
+
     const user = await User.create({
         name,
         email,
@@ -38,20 +37,16 @@ exports.loginUser = catchAsyncError(async (req, res, next) => {
     } = req.body;
 
     // checking if your has given password and email both
-
     if (!email || !password) {
         return next(new ErrorHander("Please Enter email and passsowrd", 400));
     }
 
     const user = await User.findOne({ email }).select("+password");
-
     if (!user) {
         return next(new ErrorHander("Invelid email and password", 401));
     }
 
     const isPasswordMatched = await user.comparePassword(password);
-
-
     if (!isPasswordMatched) {
         return next(new ErrorHander("Invelid email and password", 401));
     }
@@ -75,7 +70,6 @@ exports.logout = catchAsyncError(async (req, res, next) => {
     })
 
 })
-
 
 // Forgot Password
 exports.forgotPassword = catchAsyncError(async (req, res, next) => {
@@ -114,7 +108,7 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
     }
 })
 
-
+// Resat password
 exports.resetPassword = catchAsyncError(async (req,res, next) => {
 
     const resetPasswordToken = crypto
@@ -144,3 +138,21 @@ exports.resetPassword = catchAsyncError(async (req,res, next) => {
     sendToken(user,200,res)
 
 })
+
+//Get user details
+exports.getUserDetails = catchAsyncError(async (req, res, next) => {
+
+    const user = await User.findById(req.params.id);
+
+    if (!user){
+        return next(new ErrorHander("User Not Found", 404))
+    }
+
+    res.status(200).json({
+        success:true,
+        user,
+    })
+})
+
+
+
