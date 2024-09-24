@@ -140,21 +140,21 @@ exports.resetPassword = catchAsyncError(async (req,res, next) => {
 })
 
 //Get user details based on id
-// exports.getUserDetails = catchAsyncError(async (req, res, next) => {
+exports.getSingleDetails = catchAsyncError(async (req, res, next) => {
 
-//     const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id);
 
-//     if (!user){
-//         return next(new ErrorHander("User Not Found", 404))
-//     }
+    if (!user){
+        return next(new ErrorHander("User Not Found", 404))
+    }
 
-//     res.status(200).json({
-//         success:true,
-//         user,
-//     })
-// })
+    res.status(200).json({
+        success:true,
+        user,
+    })
+})
 
-//Get user details 
+//Get user details (Admin)
 exports.getUserDetails = catchAsyncError(async (req, res, next) => {
 
     const user = await User.findById(req.user.id);
@@ -210,4 +210,15 @@ exports.updateProfile = catchAsyncError(async (req, res, next) => {
         success:true,
         user,
     }) 
+})
+
+
+// Get All users 
+exports.getAllUsers = catchAsyncError(async (req, res, next) => {
+    const users = await User.find()
+
+    res.status(200).json({
+        success:true,
+        users,
+    })
 })
