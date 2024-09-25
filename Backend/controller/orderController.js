@@ -36,7 +36,6 @@ exports.newOrder = catchAsyncError(async(req, res, next) => {
 
 // Get single order
 exports.getSingleOrder = catchAsyncError(async (req, res, next) => {
-    console.log("strat get single order")
     
     const order = await Order.findById(req.params.id).populate("user","name email")
 
@@ -54,10 +53,8 @@ exports.getSingleOrder = catchAsyncError(async (req, res, next) => {
 
 // Get Logged in user order
 exports.myOrders = catchAsyncError(async (req, res, next) => {
-    console.log("Start myOrder")
     
     const orders = await Order.find({user:req.user._id});
-    console.log("orders",orders)
     if (!orders){
         return next(new ErrorHander("Order not found", 404))
     }
