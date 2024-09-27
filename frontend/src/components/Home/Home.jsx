@@ -1,8 +1,10 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import {CgMouse} from 'react-icons/cg'
 import Product from "./Product.jsx"
 import "./Home.css"
 import MetaData from "../layout/MetaData.js"
+import { getProduct } from '../../actions/productAction.js'
+import { useSelector, useDispatch } from "react-redux"
 
 const product = {
     name:"Baby wipes",
@@ -12,6 +14,14 @@ const product = {
 }
 
 function Home() {
+    
+    
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getProduct());
+    }, [dispatch]);
+    
   return <Fragment>
     <MetaData title="BigGrow App"/>
 
