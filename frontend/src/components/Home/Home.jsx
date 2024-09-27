@@ -5,52 +5,47 @@ import "./Home.css"
 import MetaData from "../layout/MetaData.js"
 import { getProduct } from '../../actions/productAction.js'
 import { useSelector, useDispatch } from "react-redux"
+import Loader from '../layout/Loader/Loader.jsx'
 
-const product = {
-    name:"Baby wipes",
-    images:[{url:"https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQVqYTj4yfEW5c8PCSRKT3jDSTIq0MQFR0V5Vl5-WRYhk5A4lDW-noBetbGheB1upAcyPx_5Lzm76Wv9oigD9sKMMA8CxBXv7Y60_B8sGcgd52BJLTuNg9xxCvHAvfK0_x2Xf12dIA&usqp=CAc"}],
-    price:"$3000",
-    _id:"Vikash"
-}
 
-function Home() {
+const Home = () => {
     
     
     const dispatch = useDispatch();
+
+    const {loading, error, products, productsCount} = useSelector((state) => state.products)
 
     useEffect(() => {
         dispatch(getProduct());
     }, [dispatch]);
     
-  return <Fragment>
-    <MetaData title="BigGrow App"/>
-
-    <div className="banner">
-
-        <p>Welcome to Grow app</p>
-        <h1>Find amazing product below</h1>
-
-        <a href="#container">
-            <button>
-                Scroll<CgMouse />
-            </button>
-        </a>
-    </div>
-
-    <h2 className="homeHeading"> Featured Products </h2>
-
-    <div className='container' id='container'>
-        <Product product={product} />
-        <Product product={product} />
-        <Product product={product} />
-        <Product product={product} />
-        <Product product={product} />
-        <Product product={product} />
-        <Product product={product} />
-        <Product product={product} />
-    </div>
-
-  </Fragment>
+  return (
+    <Fragment>
+        {loading ? (
+            <Loader />
+            ) : (
+                <Fragment>
+                    <MetaData title="BigGrow App"/>
+                    <div className="banner">
+                        <p>Welcome to Grow app</p>
+                        <h1>Find amazing product below</h1>
+                        <a href="#container">
+                            <button>
+                                Scroll<CgMouse />
+                            </button>
+                        </a>
+                    </div>
+                    <h2 className="homeHeading"> Featured Products </h2>
+                    <div className='container' id='container'>
+                        {products && products.map((product) =>(
+                            <Product product={product} />
+                        ))}
+                    </div>
+                </Fragment>
+            )
+        }
+    </Fragment>
+  )
 }
 
 export default Home
