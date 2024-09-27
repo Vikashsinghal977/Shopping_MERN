@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react'
 import {CgMouse} from 'react-icons/cg'
-import Product from "./Product.js"
+import Product from "./Product.jsx"
 import "./Home.css"
+import MetaData from "../layout/MetaData.js"
 
 const product = {
     name:"Baby wipes",
@@ -12,6 +13,8 @@ const product = {
 
 function Home() {
   return <Fragment>
+    <MetaData title="BigGrow App"/>
+
     <div className="banner">
 
         <p>Welcome to Grow app</p>
