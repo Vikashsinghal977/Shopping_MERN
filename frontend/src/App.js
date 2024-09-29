@@ -5,7 +5,7 @@ import WebFont from "webfontloader"
 import React from "react"
 import Footer from './components/layout/Footer/Footer'
 import Home from './components/Home/Home'
-import Loader from './components/layout/Loader/Loader';
+import ProductDetails from './components/Product/ProductDetails'
 
 function App() {
 
@@ -22,7 +22,8 @@ function App() {
       <Header />
       <Routes>
 
-      <Route extact path='/' Component={Home} />
+      <Route exact path='/' Component={Home} />
+      <Route exact path='/product/:id' Component={ProductDetails} />
 
       </Routes>
 

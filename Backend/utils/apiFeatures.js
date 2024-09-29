@@ -13,7 +13,7 @@ class ApiFeatures {
                 $options:"i",   //case insensitive
             }
         }:{};
-        console.log(keyword);
+        // console.log(keyword);
         this.query = this.query.find({...keyword});
         return this;
     }
