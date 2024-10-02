@@ -2,15 +2,16 @@ import React, { Fragment, useEffect } from "react";
 import Carousel from "react-material-ui-carousel";
 import "../../../src/App.css";
 import { useSelector, useDispatch } from "react-redux";
-import { getProductDetails } from "../../actions/productAction";
+import { clearErrors, getProductDetails } from "../../actions/productAction";
 import { useParams } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 import Loader from "../layout/Loader/Loader";
 import ReviewCard from "./ReviewCard.js"
+import {useAlert} from "react-alert"
 
 const ProductDetails = ({ match }) => {
   const { id } = useParams();
-
+  const alert = useAlert();
   const dispatch = useDispatch();
 
   const { product, loading, error } = useSelector(
@@ -18,8 +19,14 @@ const ProductDetails = ({ match }) => {
   );
 
   useEffect(() => {
+
+    if (error){
+      alert.error(error)
+      dispatch(clearErrors())
+    }
+
     dispatch(getProductDetails(id));
-  }, [dispatch, id]);
+  }, [dispatch, id, error, alert]);
 
   const Options = {
     edit: false,
@@ -79,8 +86,8 @@ const ProductDetails = ({ match }) => {
                 </div>
                 <p>
                   Status:{" "}
-                  <b className={product?.Stock < 1 ? "redColor" : "greenColor"}>
-                    {product?.Stock < 1 ? "OutOfStock" : "InStock"}
+                  <b className={product?.stock < 1 ? "redColor" : "greenColor"}>
+                    {product?.stock < 1 ? "OutOfStock" : "InStock"}
                   </b>
                 </p>
               </div>
