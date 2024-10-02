@@ -9,7 +9,7 @@ import Loader from "../layout/Loader/Loader";
 import ReviewCard from "./ReviewCard.js"
 import {useAlert} from "react-alert"
 
-const ProductDetails = ({ match }) => {
+const ProductDetails = () => {
   const { id } = useParams();
   const alert = useAlert();
   const dispatch = useDispatch();
@@ -45,7 +45,7 @@ const ProductDetails = ({ match }) => {
         <Fragment>
           <div className="ProductDetails">
             <div>
-              <Carousel>
+              {/* <Carousel> */}
                 {product?.images &&
                   product?.images.map((item, i) => (
                     <img
@@ -55,7 +55,7 @@ const ProductDetails = ({ match }) => {
                       alt={`${i} Slide`}
                     />
                   ))}
-              </Carousel>
+              {/* </Carousel>  */}
             </div>
 
             <div>
