@@ -92,6 +92,7 @@ const ProductDetails = ({ match }) => {
               <button className="submitReview"> Submit Review</button>
             </div>
           </div>
+          <h3 className="reviewsHeading">REVIEWS</h3>
                   {product?.reviews && product?.reviews[0] ? (
                     <div className="reviews">
 
