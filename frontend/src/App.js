@@ -6,6 +6,7 @@ import React from "react"
 import Footer from './components/layout/Footer/Footer'
 import Home from './components/Home/Home'
 import ProductDetails from './components/Product/ProductDetails'
+import Products from './components/Product/Products.jsx'
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
 
       <Route exact path='/' Component={Home} />
       <Route exact path='/product/:id' Component={ProductDetails} />
+      <Route exact path='/products' Component={Products} />
 
       </Routes>
 
