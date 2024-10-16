@@ -4,17 +4,23 @@ import { useSelector, useDispatch } from 'react-redux';
 import { clearErrors, getProduct } from '../../actions/productAction';
 import Loader from '../layout/Loader/Loader';
 import ProductCard from '../Home/ProductCard';
+import { useParams } from 'react-router-dom';
 
 
 
-const Products = () => {
+
+const Products = ( {match} ) => {
 
   const dispatch = useDispatch();
   const {loading, error,products, productsCount} = useSelector((state) => state.products)
 
 
+  const { keyword } = useParams();
+  console.log("comming", keyword)
+
+
   useEffect(() => {
-    dispatch(getProduct());
+    dispatch(getProduct(keyword));
   }, [dispatch])
   
 

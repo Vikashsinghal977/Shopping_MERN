@@ -1,5 +1,6 @@
 import React from 'react'
 import { ReactNavbar } from "overlay-navbar"
+import { FaUserAlt, FaSearch, FaCartArrowDown } from "react-icons/fa"; 
 import logo from "../../../images/logo.png"
 
 const Header = () => {
@@ -28,11 +29,21 @@ const Header = () => {
           nav4FlexDirection="flex-start"
           link1ColorHover="#eb4034"
           link1Margin="1vmax"
+
+          
+          profileIcon={true}
+          ProfileIconElement={FaUserAlt}
           profileIconColor = "rgba(35, 35, 35, 0.8)"
-          searchIconColor = "rgba(35, 35, 35, 0.8)"
-          cartIconColor = "rgba(35, 35, 35, 0.8)"
           profileIconColorHover = "#eb4034"
+
+          searchIcon={true}
+          SearchIconElement={FaSearch}
+          searchIconColor = "rgba(35, 35, 35, 0.8)"
           searchIconColorHover = "#eb4034"
+          
+          cartIcon={true}
+          CartIconElement={FaCartArrowDown}
+          cartIconColor = "rgba(35, 35, 35, 0.8)"
           cartIconColorHover	 = "#eb4034"
           cartIconMargin = "1vmax"
         />
