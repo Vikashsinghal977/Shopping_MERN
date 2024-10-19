@@ -13,12 +13,8 @@ import Pagination from 'react-js-pagination'
 const Products = ( {match} ) => {
 
   const dispatch = useDispatch();
-
   const [currentPage, setCurrentPage] = useState(1);
-
   const {loading, error,products, productsCount, resultPerpage} = useSelector((state) => state.products)
-
-
   const { keyword } = useParams();
 
   const setCurrentPageNo = (e) => {
@@ -26,8 +22,8 @@ const Products = ( {match} ) => {
   }
 
   useEffect(() => {
-    dispatch(getProduct(keyword));
-  }, [dispatch])
+    dispatch(getProduct(keyword,currentPage));
+  }, [dispatch, keyword, currentPage])
   
 
   return <Fragment>
@@ -52,24 +48,24 @@ const Products = ( {match} ) => {
               
         </div>
 
-          <div className='paginationBox'>
+          {resultPerpage < productsCount && <div className='paginationBox'>
 
-            <Pagination 
-              activePage={currentPage}
-              itemsCountPerPage={resultPerpage}
-              totalItemsCount={productsCount}
-              onChange={setCurrentPageNo}
-              nextPageText="Next"
-              prevPageText="Prev"
-              firstPageText="1st"
-              lastPageText="Last"
-              itemClass='page-item'
-              linkClass='page-link'
-              activeClass='pageItemActive'
-              activeLinkClass='pageLinkActive'
-            />
+<Pagination 
+  activePage={currentPage}
+  itemsCountPerPage={resultPerpage}
+  totalItemsCount={productsCount}
+  onChange={setCurrentPageNo}
+  nextPageText="Next"
+  prevPageText="Prev"
+  firstPageText="1st"
+  lastPageText="Last"
+  itemClass='page-item'
+  linkClass='page-link'
+  activeClass='pageItemActive'
+  activeLinkClass='pageLinkActive'
+/>
 
-          </div>
+</div>}
 
 
 

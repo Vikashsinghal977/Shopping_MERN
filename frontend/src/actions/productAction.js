@@ -10,13 +10,14 @@ import {
     PRODUCT_DETAILS_FAIL} from '../constants/ProductConstant';
 
 // Axios get product
-export const getProduct = ( keyword =" " ) => async (dispatch) => {
+export const getProduct = ( keyword ="",currentPage=1 ) => async (dispatch) => {
 
     try {
 
         dispatch({ type: ALL_PRODUCT_REQUEST});
 
-        let link = `/api/v1/products?keyword=${keyword}`;
+        let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}`;
+        console.log("Start",link)
 
         const {data} = await axios.get(link);
 
